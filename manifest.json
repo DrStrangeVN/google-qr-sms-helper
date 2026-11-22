@@ -1,37 +1,35 @@
 {
   "manifest_version": 3,
-  "name": "Google QR 自动降级短信助手",
-  "version": "1.1.0",
-  "description": "自动识别 Google 验证二维码、注入 [3,null,4] 降级状态，并在全链路 (含 batchexecute 提交验证码接口) 保持 iPad Mini 环境",
+  "name": "Google QR → SMS (Trợ lý hạ cấp xác minh Tiếng Việt)",
+  "version": "2.2.0",
+  "description": "Chuyển xác minh QR bắt buộc của Google về SMS 6 số: chạy RPC đồng nguồn, giả lập iPad Mini theo phiên (tự tắt sau 30 phút), hỗ trợ tiếng Việt & tự chẩn đoán lỗi.",
+  "minimum_chrome_version": "111",
   "permissions": [
     "declarativeNetRequest",
     "declarativeNetRequestWithHostAccess",
     "scripting",
-    "storage"
+    "storage",
+    "alarms"
   ],
   "host_permissions": [
     "https://accounts.google.com/*",
     "https://console.cloud.google.com/*",
     "https://g.co/*"
   ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Google QR → SMS (Tiếng Việt)"
+  },
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": [
-        "https://accounts.google.com/*"
-      ],
-      "js": ["ua_spoof.js"],
-      "run_at": "document_start",
-      "world": "MAIN"
-    },
-    {
-      "matches": [
         "https://accounts.google.com/*",
         "https://console.cloud.google.com/*"
       ],
-      "js": ["content.js"],
+      "js": ["logic.js", "content.js"],
       "run_at": "document_idle"
     }
   ]

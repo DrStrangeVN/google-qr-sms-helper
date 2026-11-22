@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Google QR → SMS</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 14px;
+      width: 320px;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 13px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .title { font-size: 15px; font-weight: 700; }
+    .badge { padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+    .badge.on { background: #16a34a; color: #fff; }
+    .badge.off { background: #334155; color: #cbd5e1; }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .sub { font-size: 11.5px; color: #94a3b8; line-height: 1.4; }
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-weight: 600;
+      font-size: 12.5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn-primary { background: #1a73e8; color: #fff; }
+    .btn-primary:hover { background: #1765cc; }
+    .btn-secondary { background: #334155; color: #f8fafc; }
+    .btn-secondary:hover { background: #475569; }
+    .steps { margin: 0; padding-left: 16px; color: #cbd5e1; font-size: 11.5px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title">⚡ Google QR → SMS <small style="opacity:.7">v2.2</small></div>
+    <span id="spoofBadge" class="badge off">iPad: TẮT</span>
+  </div>
+
+  <div class="card">
+    <div>
+      <div style="font-weight:600;">Giả lập iPad Mini theo phiên (tự tắt sau 30 phút)</div>
+      <div id="spoofSub" class="sub">Chỉ áp dụng cho 4 đường dẫn xác minh SMS, tự động bật khi bấm hạ cấp QR.</div>
+    </div>
+    <button id="toggleSpoofBtn" class="btn-primary">Bật giả lập iPad Mini</button>
+  </div>
+
+  <div class="card">
+    <label class="row" style="cursor:pointer;">
+      <span>Tự động hạ cấp khi mở trang QR</span>
+      <input type="checkbox" id="autoDowngradeChk" />
+    </label>
+  </div>
+
+  <div class="card">
+    <button id="openConsoleBtn" class="btn-secondary">Mở Google Cloud Console</button>
+    <ol class="steps">
+      <li>Mở Cloud Console → bấm <b>① Tự động mở Cloud Shell & Verify</b>.</li>
+      <li>Ở trang QR, bấm <b>⚡ Hạ cấp sang xác minh SMS</b>.</li>
+      <li>Chọn <b>Text message (SMS)</b>, nhập SĐT và mã 6 số.</li>
+      <li>Xong việc bấm <b>Khôi phục máy tính</b> (hoặc tự tắt sau 30 phút).</li>
+    </ol>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
